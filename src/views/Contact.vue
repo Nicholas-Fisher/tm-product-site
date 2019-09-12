@@ -58,20 +58,15 @@ form {
   }
 }
 .std-btn {
-  background-color: transparent;
-  border: none;
   background-color: #7aa;
   color: #fff;
+  border: none;
   font-family: h;
-  height: 100%;
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  transition: all linear 0.1s;
   padding: 10px;
   border-radius: 4px;
   margin-top: 15px;
   cursor: pointer;
+  transition: all linear 0.1s;
   &:hover {
     opacity: 0.65;
   }
