@@ -195,7 +195,7 @@ export default {
       padding: 0 20px;
     }
     &.router-link-active {
-      color: #5ab;
+      color: $theme-color3;
     }
     &:not(:first-child) {
       > span {

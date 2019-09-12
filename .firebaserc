@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "table-tap"
+  },
+  "targets": {
+    "table-tap": {
+      "hosting": {
+        "tm-product-site": [
+          "tm-product-site"
+        ]
+      }
+    }
+  }
+}

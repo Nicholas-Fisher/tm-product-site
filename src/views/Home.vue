@@ -18,7 +18,7 @@
           <span>No need to wait</span>
         </div>
         <div class="small">
-          Just tap your phone to the NFC card or enter the code shown at
+          Either tap your phone to the NFC card, scan the QR code, or enter the code shown at
           <span
             class="site"
           >tapmenu.app</span>. From there you can order food instantly without waiting for a server.
