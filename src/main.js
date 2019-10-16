@@ -1,6 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
+import 'normalize.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faConciergeBell,
@@ -19,8 +19,19 @@ import {
   faTimes,
   faArrowLeft,
   faArrowRight,
+  faAnalytics,
+  faTreeAlt,
+  faMobile,
+  faHeart,
+  faUtensilFork,
+  faUtensilKnife,
+  faUtensilSpoon,
+  faUtensils,
+  faUtensilsAlt,
 } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 library.add(
   faConciergeBell,
@@ -39,13 +50,23 @@ library.add(
   faTimes,
   faArrowLeft,
   faArrowRight,
+  faAnalytics,
+  faTreeAlt,
+  faMobile,
+  faHeart,
+  faUtensilFork,
+  faUtensilKnife,
+  faUtensilSpoon,
+  faUtensils,
+  faUtensilsAlt,
 );
+
+AOS.init();
 
 Vue.component('fa', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
   render: h => h(App)
 }).$mount("#app");
