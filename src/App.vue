@@ -636,12 +636,11 @@ body {
   padding-bottom: 370px;
   margin-bottom: -360px;
   position: relative;
-  border-radius: 50px;
-  background: rgb(68, 153, 170);
+  background: rgb(55, 71, 79);
   background: linear-gradient(
     180deg,
-    rgba(68, 153, 170, 1) 0%,
-    rgba(162, 202, 210, 1) 100%
+    rgba(55, 71, 79, 1) 0%,
+    rgba(222, 222, 222, 1) 100%
   );
   svg {
     margin-left: 20px;
@@ -684,11 +683,11 @@ body {
     text-align: center;
     padding: 0 30px;
   }
-  background: rgb(68, 153, 170);
+  background: rgb(55, 71, 79);
   background: linear-gradient(
     180deg,
-    rgba(68, 153, 170, 1) 0%,
-    rgba(162, 202, 210, 1) 100%
+    rgba(55, 71, 79, 1) 0%,
+    rgba(222, 222, 222, 1) 100%
   );
   clip-path: polygon(
     0% 0%,
@@ -832,7 +831,7 @@ p {
 }
 .icon-btn {
   margin: 20px;
-  background-color: rgb(68, 153, 170);
+  background-color: $theme-color1;
   color: #fff;
   border-radius: 50%;
   border: none;
@@ -872,7 +871,7 @@ p {
   }
 }
 .std-btn {
-  background-color: #7aa;
+  background-color: $theme-color1;
   color: #fff;
   border: none;
   font-family: h;
