@@ -1,0 +1,60 @@
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin card-style() {
+  background-color: #fff;
+  box-shadow: $std-shadow;
+  padding: 40px 20px;
+  border-radius: $std-border-radius;
+}
+.not-on-mobile {
+  @media #{$mobile} {
+    display: none !important;
+  }
+}
+.mobile-only {
+  @media #{$not-mobile} {
+    display: none !important;
+  }
+}
+html {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+body {
+  display: flex;
+  justify-content: center;
+  font-size: $desktop-text-size;
+  overflow-x: hidden;
+  max-width: 100vw;
+  background-color: #eee;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  font-family: p;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@font-face {
+  font-family: p;
+  src: url(assets/fonts/Quicksand-Medium.ttf);
+}
+@font-face {
+  font-family: h;
+  src: url(assets/fonts/Oswald-Regular.ttf);
+}

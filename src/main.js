@@ -1,5 +1,6 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "@/App.vue";
+import router from '@/router.js'
 import 'normalize.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -68,5 +69,6 @@ Vue.component('fa', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 new Vue({
+  router,
   render: h => h(App)
 }).$mount("#app");
