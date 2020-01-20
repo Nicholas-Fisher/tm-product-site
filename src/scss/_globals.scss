@@ -32,6 +32,9 @@ body {
   overflow-x: hidden;
   max-width: 100vw;
   background-color: #eee;
+  @media #{$mobile} {
+    font-size: $mobile-text-size;
+  }
 }
 *,
 *:before,
@@ -57,4 +60,8 @@ body {
 @font-face {
   font-family: h;
   src: url(assets/fonts/Oswald-Regular.ttf);
+}
+@font-face {
+  font-family: hero;
+  src: url(assets/fonts/AbrilFatface-Regular.ttf);
 }

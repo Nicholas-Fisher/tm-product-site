@@ -29,6 +29,14 @@ import {
   faUtensilSpoon,
   faUtensils,
   faUtensilsAlt,
+  faCoffeeTogo,
+  faCoins,
+  faTasks,
+  faSurprise,
+  faLaptop,
+  faBookOpen,
+  faAngleRight,
+  faTypewriter,
 } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AOS from 'aos';
@@ -60,6 +68,14 @@ library.add(
   faUtensilSpoon,
   faUtensils,
   faUtensilsAlt,
+  faCoffeeTogo,
+  faCoins,
+  faTasks,
+  faSurprise,
+  faLaptop,
+  faBookOpen,
+  faTypewriter,
+  faAngleRight,
 );
 
 AOS.init();
