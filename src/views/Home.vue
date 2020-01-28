@@ -36,7 +36,7 @@
           </video>
         </div>
       </div>
-      <div class="reason-block intro-block">
+      <div class="reason-block long-block">
         <div class="big">
           <div class="icon-container multiple">
             <fa :icon="['far', 'typewriter']" />
@@ -52,7 +52,7 @@
           >illuminate in the dark?</span>
         </div>
       </div>
-      <div class="reason-block intro-block">
+      <div class="reason-block long-block">
         <div class="big">
           <div class="icon-container multiple">
             <fa :icon="['far', 'book-open']" />
@@ -313,7 +313,7 @@
           <span class="right">How it works</span>
         </div>
       </div>
-      <div class="reason-block intro-block" data-aos="fade-left">
+      <div class="reason-block long-block" data-aos="fade-left">
         <div
           class="small"
         >For dine-in restaurants, it works by having a card or sticker placed on each table that is uniquely linked to that table. For QSR locations or food trucks, a poster is placed on a prominent surface. Both the cards/stickers and the poster have three things on them: an NFC chip, QR code, and a web link. The customer can choose one of these three methods to open the menu on their phone. From there they can make orders, send requests, ask questions, and pay for their order. You can watch the video below for an overview of the experience.</div>
@@ -337,51 +337,58 @@
           />
         </div>
       </div>
-      <div class="reason-block intro-block" data-aos="fade-right">
-        <div
-          class="small"
-        >Tap Menu is a white label solution that stays out of the way of your branding. Our menu is highly customizable so uou can maintain your restaurant's unique look and feel.</div>
-      </div>
-      <div class="possible-designs">
-        <div class="mobile-only">Swipe to see more</div>
-        <div class="siema-container">
-          <div id="siema">
-            <div>
-              <img src="../assets/images/screens/caribbean-min.png" />
+      <div class="wrap-container">
+        <div class="reason-block" data-aos="fade-right">
+          <div
+            class="small"
+          >Tap Menu is a white label solution that stays out of the way of your branding. Our menu is highly customizable so you can maintain your restaurant's unique look and feel.</div>
+        </div>
+        <div class="possible-designs">
+          <div class="mobile-only">Swipe to see more</div>
+          <div class="siema-container">
+            <div id="siema">
+              <div>
+                <img src="../assets/images/screens/caribbean-min.png" />
+              </div>
+              <div>
+                <img src="../assets/images/screens/classy-min.png" />
+              </div>
+              <div>
+                <img src="../assets/images/screens/default-min.png" />
+              </div>
+              <div>
+                <img src="../assets/images/screens/nouvelleBlanc-min.png" />
+              </div>
+              <div>
+                <img src="../assets/images/screens/nouvelleNoir-min.png" />
+              </div>
+              <div>
+                <img src="../assets/images/screens/healthy-min.png" />
+              </div>
+              <div>
+                <img src="../assets/images/screens/cyberpunk-min.png" />
+              </div>
             </div>
-            <div>
-              <img src="../assets/images/screens/classy-min.png" />
+            <div class="carousel-buttons not-on-mobile">
+              <button class="icon-btn" @click="mySiema.prev()">
+                <fa :icon="['far', 'arrow-left']" />
+              </button>
+              <button class="icon-btn" @click="mySiema.next()">
+                <fa :icon="['far', 'arrow-right']" />
+              </button>
             </div>
-            <div>
-              <img src="../assets/images/screens/default-min.png" />
-            </div>
-            <div>
-              <img src="../assets/images/screens/nouvelleBlanc-min.png" />
-            </div>
-            <div>
-              <img src="../assets/images/screens/nouvelleNoir-min.png" />
-            </div>
-            <div>
-              <img src="../assets/images/screens/healthy-min.png" />
-            </div>
-            <div>
-              <img src="../assets/images/screens/cyberpunk-min.png" />
-            </div>
-          </div>
-          <div class="carousel-buttons not-on-mobile">
-            <button class="icon-btn" @click="mySiema.prev()">
-              <fa :icon="['far', 'arrow-left']" />
-            </button>
-            <button class="icon-btn" @click="mySiema.next()">
-              <fa :icon="['far', 'arrow-right']" />
-            </button>
           </div>
         </div>
       </div>
+
       <div class="anchor-point" id="contact" />
       <div class="lt-container">
         <div class="large-text seventh">
-          <img class="decorative-image contact-lady" alt="People Sitting" src="../assets/images/chat.svg" />
+          <img
+            class="decorative-image contact-lady"
+            alt="People Sitting"
+            src="../assets/images/chat.svg"
+          />
           <span class="right">How to get us in your restaurant</span>
         </div>
       </div>
@@ -723,7 +730,7 @@ export default {
     color: #555;
   }
 }
-.reason-block.intro-block {
+.reason-block.long-block {
   border-radius: 30px;
   margin-bottom: 10px;
   max-width: 820px !important;
@@ -1011,4 +1018,24 @@ video {
   position: relative;
   top: -30px;
 }
+.wrap-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;;
+  flex-wrap: wrap;
+  .reason-block {
+    position: relative;
+    bottom: 50px;
+    margin-right: 80px !important;
+  }
+  @media #{$mobile} {
+    .reason-block {
+      position: initial;
+      bottom: 0;
+      margin-right: 15px !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
 </style>
