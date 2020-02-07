@@ -46,7 +46,7 @@
           <span>The paper menu is great, but...</span>
         </div>
         <div class="small">
-          Wouldn't be nice if it could materialize in your customers hands, instantly update, send orders straight to your staff, present options based on customer preferences, raise turnover during busy hours, explain the food, translate to multple languages, increase tips, provide analytics, take payments, and
+          Wouldn't be nice if it could materialize in your customers hands, instantly update, send orders straight to your staff, present options based on customer preferences, raise turnover during busy hours, explain the food, translate to multiple languages, increase tips, provide analytics, take payments, and
           <span
             class="illuminate"
           >illuminate in the dark?</span>
@@ -63,7 +63,7 @@
         </div>
         <div
           class="small"
-        >A digital menu solution that leverages the powerful communication device in everyone's pocket. Using our cards, stickers, or posters, customers can order and pay using their own mobile devices. It's similar to the table-side tablet ordering you see in sushi buffets or the kiosk terminal ordering in fast food places but without the insane costs, hefty space requirements, maintainence, or line ups. Try it now to see what it looks like in your browser (looks best on mobile).</div>
+        >A digital menu solution that leverages the powerful communication device in everyone's pocket. Using our cards, stickers, or posters, customers can order and pay using their own mobile devices. It's similar to the table-side tablet ordering you see in sushi buffets or the kiosk terminal ordering in fast food places but without the insane costs, hefty space requirements, maintenance, or line ups. Try it now to see what it looks like in your browser (looks best on mobile).</div>
         <br />
         <div class="center">
           <a class="std-btn dark" target="_blank" href="https://tapmenu.app?c=000">Try it now</a>
