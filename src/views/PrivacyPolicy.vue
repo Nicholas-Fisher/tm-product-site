@@ -89,7 +89,7 @@
 <style lang="scss" scoped>
 .policy-page {
   max-width: 800px;
-  margin: 50px 0;
+  margin: 50px 20px;
   h1 {
     text-align: center;
   }
