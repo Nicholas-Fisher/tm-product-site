@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <div id="nav">
-      <div class="nav-inner">
+      <div class="nav-inner not-on-mobile">
         <a href="#app">
           <img class="logo" alt="logo" src="../assets/images/logo.png" />
         </a>
-        <div class="nav-links not-on-mobile">
+        <div class="nav-links">
           <a href="#customers">
             <span>Why Tap Menu</span>
           </a>
@@ -19,54 +19,115 @@
       </div>
     </div>
     <div class="main-content">
-      <div class="lt-container">
-        <div class="large-text first">
-          <img
-            class="decorative-image order-lady"
-            alt="People Sitting"
-            src="../assets/images/tap-to-order.svg"
+      <div ref="cardSection" class="scene" :class="{'is-tapping': cardTapping}">
+        <div class="card" :class="{'is-flipped': cardFlipped}" @click="cardFlip">
+          <div class="card-face card-face-front">
+            <img class="qr" :src="qr" />
+          </div>
+          <div class="card-face card-face-back">
+            <img class="logo" :src="img" />
+          </div>
+        </div>
+      </div>
+      <div ref="deviceSection" class="device-section">
+        <div class="device-text" v-show="cardTapFinished">
+          <div class="inner-text" v-if="siema.currentSlide === 0">
+            <p class="big-text">
+              Just
+              <span class="clickable-text" @click="cardTap">tap</span> or
+              <span class="clickable-text" @click="cardFlip">scan</span> to order with your phone.
+            </p>
+            <p>No app to download or sign in required.</p>
+          </div>
+          <div class="inner-text" v-if="siema.currentSlide === 1">
+            <p class="big-text">See more detail.</p>
+            <p>Pictures, calorie counts, portion sizes, descriptions. It's all here.</p>
+          </div>
+          <div class="inner-text" v-if="siema.currentSlide === 2">
+            <p class="big-text">Filter by preferences.</p>
+            <p>Already have an idea of what you want? Narrow the list down.</p>
+          </div>
+          <div class="inner-text" v-if="siema.currentSlide === 3">
+            <p class="big-text">Send messages.</p>
+            <p>Why wave down servers when we have these high tech communication devices?</p>
+          </div>
+          <div class="inner-text" v-if="siema.currentSlide === 4">
+            <p class="big-text">Pay and leave at your leisure.</p>
+            <p>You no longer have to wait for the payment terminal. Pay through your phone and head out at your leisure.</p>
+          </div>
+          <div class="inner-text" v-if="siema.currentSlide === 5">
+            <p class="big-text">Want it in your place?</p>
+            <p>Tap Menu is just $49/month and it'll make you so much more.</p>
+            <p>
+              <a class="clickable-text" href="#contact">Contact</a> us to find out how to get it in your restaurant.
+            </p>
+          </div>
+          <!-- <div class="carousel-dots" v-if="images.length > 1">
+            <div
+              class="carousel-dot"
+              v-for="(i, index) in images"
+              :key="index"
+              @click="siemaDotClick(index)"
+              :class="{'active' : siema.currentSlide == index}"
+            />
+          </div> -->
+          <button
+            v-if="siema.currentSlide === 5"
+            class="device-btn"
+            v-text="'Restart'"
+            @click="restart"
           />
-          <span class="right">Just tap to order with your phone</span>
+          <button v-else class="device-btn" v-text="'Next'" @click="siema.next();" />
         </div>
-      </div>
-      <div class="video-outer webm">
-        <div class="video-container webm-container">
-          <video autoplay muted loop poster="../assets/images/tap-menu-min.png">
-            <source src="../assets/videos/slim.webm" type="video/webm" />Your browser does not support HTML5 video.
-          </video>
-        </div>
-      </div>
-      <div class="reason-block long-block">
-        <div class="big">
-          <div class="icon-container multiple">
-            <fa :icon="['far', 'typewriter']" />
-            <fa :icon="['far', 'angle-right']" />
-            <fa :icon="['far', 'laptop']" />
+        <div class="device-container">
+          <div class="device device-iphone-x">
+            <div class="device-frame">
+              <div class="slide how" v-show="!turnOnPhone">
+                <div class="icon-container multiple">
+                  <fa :icon="['fad', 'typewriter']" />
+                  <fa :icon="['fad', 'angle-right']" />
+                  <fa :icon="['fad', 'laptop']" />
+                </div>
+                <p>The paper menu is great, but...</p>
+                <p>
+                  Wouldn't be nice if it could materialize in your customers hands, instantly update, send orders straight to your staff, present options based on customer preferences, raise turnover during busy hours, explain the food, translate to multiple languages, increase tips, provide analytics, take payments, and
+                  <span
+                    class="illuminate"
+                  >illuminate in the dark?</span>
+                  Well now it can.
+                </p>
+                <p class="tap-here" @click="screenTap">Tap here to see how it works.</p>
+              </div>
+              <div
+                id="phone-siema"
+                :class="{'turn-on': turnOnPhone}"
+                :style="{'visibility': turnOnPhone ? 'visible' : 'hidden'}"
+              >
+                <div v-for="(i, index) in images" :key="index">
+                  <div :class="'slide img ' + i.image" @click="siema.next();" />
+                </div>
+                <div class="slide how">
+                  <div class="icon-container multiple">
+                    <fa :icon="['fad', 'book-open']" />
+                    <fa :icon="['fad', 'angle-right']" />
+                    <fa :icon="['fad', 'mobile-android']" />
+                  </div>
+                  <p>
+                    Using our cards, plaques, stands or posters, customers can order and pay using their own mobile devices. It's similar to the table-side tablet ordering you see in sushi buffets or the kiosk terminal ordering in fast food places but without the insane costs, hefty space requirements, maintenance, or line ups.
+                    <span
+                      class="tap-here"
+                      @click="openTapMenu"
+                    >Press here to try it out</span> and see how it looks in your browser (looks best on mobile).
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="device-stripe"></div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
           </div>
-          <span>The paper menu is great, but...</span>
-        </div>
-        <div class="small">
-          Wouldn't be nice if it could materialize in your customers hands, instantly update, send orders straight to your staff, present options based on customer preferences, raise turnover during busy hours, explain the food, translate to multiple languages, increase tips, provide analytics, take payments, and
-          <span
-            class="illuminate"
-          >illuminate in the dark?</span>
-        </div>
-      </div>
-      <div class="reason-block long-block">
-        <div class="big">
-          <div class="icon-container multiple">
-            <fa :icon="['far', 'book-open']" />
-            <fa :icon="['far', 'angle-right']" />
-            <fa :icon="['far', 'mobile-android']" />
-          </div>
-          <span>Introducing Tap Menu</span>
-        </div>
-        <div
-          class="small"
-        >A digital menu solution that leverages the powerful communication device in everyone's pocket. Using our cards, stickers, or posters, customers can order and pay using their own mobile devices. It's similar to the table-side tablet ordering you see in sushi buffets or the kiosk terminal ordering in fast food places but without the insane costs, hefty space requirements, maintenance, or line ups. Try it now to see what it looks like in your browser (looks best on mobile).</div>
-        <br />
-        <div class="center">
-          <a class="std-btn dark" target="_blank" href="https://tapmenu.app?c=000">Try it now</a>
         </div>
       </div>
 
@@ -85,7 +146,7 @@
         <div class="reason-block" data-aos="fade-left">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'concierge-bell']" />
+              <fa :icon="['fad', 'concierge-bell']" />
             </div>
             <span>No need to wait</span>
           </div>
@@ -99,7 +160,7 @@
         <div class="reason-block" data-aos="fade-left">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'search']" />
+              <fa :icon="['fad', 'search']" />
             </div>
             <span>Get more information</span>
           </div>
@@ -110,7 +171,7 @@
         <div class="reason-block" data-aos="fade-left">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'check']" />
+              <fa :icon="['fad', 'check']" />
             </div>
             <span>See what you care about</span>
           </div>
@@ -121,7 +182,7 @@
         <div class="reason-block" data-aos="fade-left">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'mobile-android']" />
+              <fa :icon="['fad', 'mobile-android']" />
             </div>
             <span>Pay through your phone</span>
           </div>
@@ -132,7 +193,7 @@
         <div class="reason-block" data-aos="fade-left">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'comments']" />
+              <fa :icon="['fad', 'comments']" />
             </div>
             <span>Chat with the restaurant</span>
           </div>
@@ -143,7 +204,7 @@
         <div class="reason-block" data-aos="fade-left">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'smile']" />
+              <fa :icon="['fad', 'smile']" />
             </div>
             <span>Simple and easy</span>
           </div>
@@ -163,7 +224,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'dollar-sign']" />
+              <fa :icon="['fad', 'dollar-sign']" />
             </div>
             <span>Digital menus for free</span>
           </div>
@@ -174,7 +235,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'comment-alt-smile']" />
+              <fa :icon="['fad', 'comment-alt-smile']" />
             </div>
             <span>Get feedback</span>
           </div>
@@ -185,7 +246,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'door-open']" />
+              <fa :icon="['fad', 'door-open']" />
             </div>
             <span>Enjoy faster turnover</span>
           </div>
@@ -196,7 +257,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'puzzle-piece']" />
+              <fa :icon="['fad', 'puzzle-piece']" />
             </div>
             <span>It fits with your brand</span>
           </div>
@@ -207,7 +268,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'analytics']" />
+              <fa :icon="['fad', 'analytics']" />
             </div>
             <span>Analytics</span>
           </div>
@@ -218,7 +279,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'tree-alt']" />
+              <fa :icon="['fad', 'tree-alt']" />
             </div>
             <span>Living menus</span>
           </div>
@@ -229,7 +290,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'coffee-togo']" />
+              <fa :icon="['fad', 'coffee-togo']" />
             </div>
             <span>Streamline take-out</span>
           </div>
@@ -240,7 +301,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'exclamation-square']" />
+              <fa :icon="['fad', 'exclamation-square']" />
             </div>
             <span>Cutdown on errors</span>
           </div>
@@ -251,7 +312,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'surprise']" />
+              <fa :icon="['fad', 'surprise']" />
             </div>
             <span>Impress your customers</span>
           </div>
@@ -271,7 +332,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'coins']" />
+              <fa :icon="['fad', 'coins']" />
             </div>
             <span>More tips</span>
           </div>
@@ -282,7 +343,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'tasks']" />
+              <fa :icon="['fad', 'tasks']" />
             </div>
             <span>Tracked upselling</span>
           </div>
@@ -293,7 +354,7 @@
         <div class="reason-block" data-aos="fade-right">
           <div class="big">
             <div class="icon-container">
-              <fa :icon="['far', 'balance-scale-left']" />
+              <fa :icon="['fad', 'balance-scale-left']" />
             </div>
             <span>Reduced workload</span>
           </div>
@@ -314,9 +375,10 @@
         </div>
       </div>
       <div class="reason-block long-block" data-aos="fade-left">
+        <img src="../assets/images/methods-min.jpg"/>
         <div
           class="small"
-        >For dine-in restaurants, it works by having a card or sticker placed on each table that is uniquely linked to that table. For QSR locations or food trucks, a poster is placed on a prominent surface. Both the cards/stickers and the poster have three things on them: an NFC chip, QR code, and a web link. The customer can choose one of these three methods to open the menu on their phone. From there they can make orders, send requests, ask questions, and pay for their order. You can watch the video below for an overview of the experience.</div>
+        >For dine-in restaurants, Either a Tap Menu card is given to guests, or tables will have a Tap Menu plaque preplaced on them. For QSR locations or food trucks, a Tap Menu poster or Tap Menu stand is prominently placed somewhere guests can access them. All options have three things on them: an NFC chip, QR code, and a web link. The customer can choose one of these three methods to open the menu on their phone. From there they can make orders, send requests, ask questions, and pay for their order. You can watch the video below for an overview of the experience.</div>
       </div>
       <div class="video-outer youtube">
         <div class="video-container youtube-container">
@@ -370,11 +432,11 @@
               </div>
             </div>
             <div class="carousel-buttons not-on-mobile">
-              <button class="icon-btn" @click="mySiema.prev()">
-                <fa :icon="['far', 'arrow-left']" />
+              <button class="icon-btn" @click="themeSiema.prev()">
+                <fa :icon="['fad', 'arrow-left']" />
               </button>
-              <button class="icon-btn" @click="mySiema.next()">
-                <fa :icon="['far', 'arrow-right']" />
+              <button class="icon-btn" @click="themeSiema.next()">
+                <fa :icon="['fad', 'arrow-right']" />
               </button>
             </div>
           </div>
@@ -394,6 +456,7 @@
       </div>
       <div class="contact-us">
         <div class="contact-section">
+          <p>Tap Menu is just $49/month and it'll make you so much more.</p>
           <p>
             To request a demo or find out how you can get Tap Menu in your restaurant, reach us at
             <a
@@ -422,10 +485,10 @@
       <div class="nav-touchable">
         <button class="nav-btn" @click="isFullNav = !isFullNav">
           <div class="label" v-show="!isFullNav">
-            <fa :icon="['far', 'bars']" />
+            <fa :icon="['fad', 'bars']" />
           </div>
           <div class="label" v-show="isFullNav">
-            <fa :icon="['far', 'times']" />
+            <fa :icon="['fad', 'times']" />
           </div>
         </button>
         <div @click="isFullNav = !isFullNav">
@@ -451,18 +514,60 @@
 </template>
 
 <script>
+import Vue from "vue";
 import Siema from "siema";
+import img from "./../assets/images/tapMenuLogoWhite.png";
+import qr from "./../assets/images/qr.png";
 
 export default {
   name: "home",
   data() {
     return {
+      img,
+      qr,
+      currIndex: 0,
+      animationTimeout: 0,
+      cardFlipped: false,
+      cardTapping: false,
+      cardTapFinished: false,
+      turnOnPhone: false,
+      isSoldOut: true,
+      notifyForSaleEmail: "",
+      siema: {},
+      images: [
+        { image: "img-1" },
+        { image: "img-2" },
+        { image: "img-3" },
+        { image: "img-4" },
+        { image: "img-5" }
+      ],
       isFullNav: false,
-      mySiema: {}
+      themeSiema: {}
     };
   },
   mounted() {
-    this.$data.mySiema = new Siema({
+    const self = this;
+    Vue.nextTick(() => {
+      self.$data.siema = new Siema({
+        selector: "#phone-siema",
+        duration: 200,
+        easing: "ease-out",
+        perPage: 1,
+        startIndex: 0,
+        draggable: true,
+        multipleDrag: true,
+        threshold: 20,
+        loop: false,
+        onInit: () => {
+          return;
+        },
+        onChange: () => {
+          return;
+        }
+      });
+    });
+    self.cardFlip();
+    self.$data.themeSiema = new Siema({
       selector: "#siema",
       duration: 200,
       easing: "ease-out",
@@ -477,19 +582,266 @@ export default {
         return;
       }
     });
+  },
+  methods: {
+    openTapMenu() {
+      window.open("https://tapmenu.app/?c=000", "_blank");
+    },
+    restart() {
+      this.$data.siema.goTo(0);
+      this.$data.cardTapping = false;
+      this.$data.cardTapFinished = false;
+      this.$data.turnOnPhone = false;
+    },
+    siemaDotClick(index) {
+      this.$data.siema.goTo(index);
+    },
+    cardFlip() {
+      window.scrollTo(0,0);
+      this.$data.cardFlipped = !this.$data.cardFlipped;
+    },
+    cardTap() {
+      window.scrollTo(0,0);
+      this.$data.cardTapping = true;
+      clearTimeout(this.$data.animationTimeout);
+      this.$data.animationTimeout = setTimeout(() => {
+        this.$data.cardTapping = false;
+      }, 2000);
+    },
+    scrollIntoViewWithOffset(element, headerOffset) {
+      const documentTop = document.documentElement.scrollTop || window.scrollY;
+      const elementPosition = element.getBoundingClientRect().top + documentTop;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    },
+    screenTap() {
+      if (!this.$data.cardTapping) {
+        window.scrollTo(0,0);
+        this.$data.cardTapping = true;
+        this.$data.turnOnPhone = true;
+        clearTimeout(this.$data.animationTimeout);
+        this.$data.animationTimeout = setTimeout(() => {
+          this.$data.cardTapping = false;
+          this.$data.cardTapFinished = true;
+          Vue.nextTick(() => {
+            this.scrollIntoViewWithOffset(this.$refs.deviceSection, 50);
+          });
+        }, 2000);
+      }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "./scss/_devices.scss";
+$initial-device-height: 868px;
+.device-btn {
+  margin: 10px 0 20px 0;
+  color: #000;
+  font-size: 30px;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  background-color: #399;
+  font-family: h;
+  border-radius: 5px;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:focus,
+  &:hover {
+    outline: none;
+    opacity: 0.75;
+  }
+}
+#phone-siema {
+  border-radius: 45px;
+  animation-duration: 2000ms;
+  &.turn-on {
+    animation-name: turn-on;
+  }
+}
+.device-text {
+  line-height: 35px;
+  max-width: 310px;
+  width: 95vw;
+}
+.contact-section {
+  line-height: 30px;
+}
+@keyframes turn-on {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.card-face .logo {
+  width: 60%;
+}
+.qr {
+  width: 50%;
+}
+.img {
+  @include background-image();
+}
+.img-1 {
+  background-position: 0 0px;
+  background-image: url("./../assets/images/iphoneMenu.png");
+}
+.img-2 {
+  background-image: url("./../assets/images/iphoneMenuItem.png");
+}
+.img-3 {
+  background-image: url("./../assets/images/iphoneFilter.png");
+}
+.img-4 {
+  background-image: url("./../assets/images/iphoneMessages.png");
+}
+.img-5 {
+  background-image: url("./../assets/images/iphonePay.png");
+}
+.scene {
+  width: 100%;
+  margin-top: 40px;
+  max-width: 250px;
+  height: 398px;
+  perspective: 600px;
+  position: relative;
+  animation-duration: 2s;
+  &.is-tapping {
+    animation-name: example;
+  }
+}
+@keyframes example {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 290px;
+    transform: rotateZ(10deg);
+  }
+  100% {
+    top: 0px;
+  }
+}
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.card-face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  @include flex-center;
+  border-radius: 15px;
+}
+.card-face-back {
+  background: #111;
+  transform: rotateY(180deg);
+}
+.card-face-front {
+  background: #fff;
+}
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+.highlight {
+  font-weight: bold;
+}
+.tap-here {
+  font-size: 21px;
+  font-family: b;
+  margin-left: 0px;
+  color: scale-color(#399, $lightness: 50%);
+  display: inline-block;
+  cursor: pointer;
+}
+.phone-big {
+  font-family: b;
+  font-size: 25px;
+}
+.device-section {
+  padding-top: 40px;
+  max-width: $max-width;
+  display: flex;
+  .slide {
+    height: 812px;
+    max-width: 375px;
+    p {
+      font-size: 20px;
+      width: 100%;
+      margin: 10px 0;
+    }
+    svg {
+      color: scale-color(#399, $lightness: 50%);
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .how {
+    color: #fff;
+    line-height: 40px;
+    padding: 30px;
+    @include flex-center();
+    flex-direction: column;
+  }
+  .device-text {
+    font-size: 25px;
+    padding: 30px;
+    color: #111;
+    z-index: 1;
+    .big-text {
+      font-size: 30px;
+      font-family: b;
+    }
+    .std-btn {
+      align-self: flex-end;
+    }
+  }
+  .inner-text {
+    animation-duration: 300ms;
+    animation-name: fade-in;
+  }
+  .device-container {
+    flex: 0 0 auto;
+    max-width: 100vw;
+    margin-bottom: 40px;
+    overflow: hidden;
+    height: $initial-device-height;
+    @include flex-center();
+  }
+}
+svg {
+  color: #399;
+}
 .image-examples {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .large-text {
-  font-family: hero;
-  font-size: 55px;
+  font-family: b;
+  font-size: 50px;
   padding: 20px 40px 30px 40px;
   display: inline-flex;
   justify-content: center;
@@ -499,27 +851,7 @@ export default {
   span {
     padding-bottom: 20px;
     border-bottom: 5px solid;
-  }
-  &.first span {
-    border-color: #4285f4;
-  }
-  &.second span {
-    border-color: #6c63ff;
-  }
-  &.third span {
-    border-color: #ff6347;
-  }
-  &.fourth span {
-    border-color: #38d39f;
-  }
-  &.fifth span {
-    border-color: #6c63ff;
-  }
-  &.sixth span {
-    border-color: #ffc107;
-  }
-  &.seventh span {
-    border-color: #009688;
+    border-color: #399;
   }
   span.right {
     margin-left: 30px;
@@ -691,24 +1023,25 @@ export default {
   max-width: 1200px;
   margin-top: 10px;
 }
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  &.multiple {
+    svg {
+      font-size: 50px;
+      margin: 0 10px;
+    }
+  }
+}
 .reason-block {
   @include card-style();
   padding: 40px 20px;
   border-radius: 30px;
   max-width: 370px;
   margin: 15px;
-  .icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    &.multiple {
-      svg {
-        margin: 0 10px;
-      }
-    }
-  }
   .big {
     font-size: 25px;
     font-weight: bold;
@@ -721,7 +1054,7 @@ export default {
     margin-bottom: 20px;
     border-radius: 20px;
     svg {
-      font-size: 40px;
+      font-size: 50px;
     }
   }
   .small {
@@ -731,9 +1064,19 @@ export default {
   }
 }
 .reason-block.long-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 30px;
   margin-bottom: 10px;
   max-width: 820px !important;
+  img {
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+  }
   .small {
     text-align: left !important;
     padding: 0 20px;
@@ -744,9 +1087,10 @@ export default {
   }
 }
 .illuminate {
+  display: inline;
   color: #fff;
-  text-shadow: -1px -1px 4px #000, 1px -1px 4px #000, -1px 1px 4px #000,
-    1px 1px 4px #000;
+  text-shadow: -1px -1px 4px #000, 1px -1px 4px #fff, -1px 1px 4px #fff,
+    1px 1px 4px #fff;
 }
 .center {
   @include flex-center();
@@ -866,6 +1210,9 @@ video {
 .carousel-buttons {
   display: flex;
   justify-content: space-between;
+  svg {
+    color: #fff;
+  }
 }
 .icon-btn {
   margin: 20px;
@@ -919,11 +1266,10 @@ video {
   text-decoration: none;
   text-transform: uppercase;
   margin: 0 10px;
-  &.dark {
-    background-color: #333;
-  }
+  &:focus,
   &:hover {
-    opacity: 0.65;
+    outline: none;
+    opacity: 0.75;
   }
   > span {
     padding: 0 20px;
@@ -957,8 +1303,13 @@ video {
   }
 }
 @media #{$mobile} {
+.device-text {
+  line-height: 35px;
+  max-width: 500px;
+  width: 95vw;
+}
   .large-text {
-    font-size: 28px;
+    font-size: 25px;
     padding: 10px 20px;
     flex-direction: column;
     align-items: center;
@@ -1018,10 +1369,19 @@ video {
   position: relative;
   top: -30px;
 }
+.clickable-text {
+  color: #399;
+  font-family: b;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.75;
+  }
+}
 .wrap-container {
   display: flex;
   align-items: center;
-  justify-content: center;;
+  justify-content: center;
   flex-wrap: wrap;
   .reason-block {
     position: relative;
@@ -1037,5 +1397,74 @@ video {
     }
   }
 }
+@media #{$mobile} {
+  $shrink-factor: 0.9;
+  .device-section {
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    .device-container {
+      height: $initial-device-height * $shrink-factor;
+    }
+    .device-text {
+      @include flex-center();
+      flex-direction: column;
+      width: 100%;
+      font-size: 20px;
+      padding: 0 30px;
+      color: #111;
+      z-index: 1;
 
+      .big-text {
+        font-size: 25px;
+      }
+      .std-btn {
+        align-self: center;
+        margin: 10px 0 20px 0;
+      }
+      p {
+        margin: 10px;
+      }
+    }
+    .inner-text {
+      height: auto;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+    }
+    .device {
+      margin: 0;
+      transform: scale($shrink-factor);
+    }
+  }
+  .scene {
+    margin-top: 20px;
+    max-width: 235px * $shrink-factor;
+    height: 375px * $shrink-factor;
+  }
+  .inner-text {
+    line-height: 30px;
+  }
+}
+@media #{$mega-small} {
+  $shrink-factor: 0.7;
+  .device-section {
+    .device-text {
+      font-size: 15px;
+      .big-text {
+        font-size: 20px;
+      }
+    }
+    .device {
+      transform: scale($shrink-factor);
+    }
+    .device-container {
+      height: $initial-device-height * $shrink-factor;
+    }
+  }
+  .scene {
+    max-width: 235px * $shrink-factor;
+    height: 375px * $shrink-factor;
+  }
+}
 </style>

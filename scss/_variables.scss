@@ -1,6 +1,7 @@
 $desktop: "(min-width: 1025px)";
 $tablet: "(min-width: 769px) and (max-width: 1024px)";
 $mobile: "(max-width: 768px)";
+$mega-small: '(max-width: 400px)';
 $not-mobile: "(min-width: 769px)";
 $nav-height: 60px;
 $mobile-text-size: 16px;
@@ -14,6 +15,7 @@ $max-width: 1250px;
 $theme-color1: #49a;
 $theme-color2: #fff;
 $std-border-radius: 5px;
+$clickable-text-color: #0270d9;
 
 @mixin flex-center() {
   display: flex;
@@ -25,4 +27,10 @@ $std-border-radius: 5px;
   background-color: #fff;
   box-shadow: $std-shadow;
   border-radius: $std-border-radius;
+}
+
+@mixin background-image() {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

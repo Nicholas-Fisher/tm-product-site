@@ -37,7 +37,7 @@ import {
   faBookOpen,
   faAngleRight,
   faTypewriter,
-} from '@fortawesome/pro-regular-svg-icons';
+} from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AOS from 'aos';
 import 'aos/dist/aos.css';

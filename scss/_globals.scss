@@ -41,7 +41,7 @@ body {
   box-sizing: border-box;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: p;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #333;
@@ -61,6 +61,7 @@ body {
   src: url(assets/fonts/Oswald-Regular.ttf);
 }
 @font-face {
-  font-family: hero;
-  src: url(assets/fonts/AbrilFatface-Regular.ttf);
+  font-family: b;
+  src: url(assets/fonts/Poppins/Poppins-Bold.ttf);
+  // src: url(assets/fonts/Oswald/Oswald-Regular.ttf);
 }
