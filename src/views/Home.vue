@@ -57,7 +57,8 @@
           </div>
           <div class="inner-text" v-if="siema.currentSlide === 5">
             <p class="big-text">Want it in your place?</p>
-            <p>Tap Menu is just $49/month and it'll make you so much more.</p>
+            <p>Tap Menu is free until Oct 1st 2020!</p>
+            <small>Normally it's $9/month for takeout/delivery ordering and $49/month for tableside ordering.</small>
             <p>
               <a class="clickable-text" href="#contact">Contact</a> us to find out how to get it in your restaurant.
             </p>
@@ -70,7 +71,7 @@
               @click="siemaDotClick(index)"
               :class="{'active' : siema.currentSlide == index}"
             />
-          </div> -->
+          </div>-->
           <button
             v-if="siema.currentSlide === 5"
             class="device-btn"
@@ -130,7 +131,8 @@
           </div>
         </div>
       </div>
-
+      <p class="widget-text">We're excited to announce that Tap Menu now offers online ordering directly on your website via a small widget!</p>
+      <button class="std-btn" @click="loadWidget">See how it works</button>
       <div class="anchor-point" id="customers" />
       <div class="lt-container">
         <div class="large-text second">
@@ -375,7 +377,7 @@
         </div>
       </div>
       <div class="reason-block long-block" data-aos="fade-left">
-        <img src="../assets/images/methods-min.jpg"/>
+        <img src="../assets/images/methods-min.jpg" />
         <div
           class="small"
         >For dine-in restaurants, Either a Tap Menu card is given to guests, or tables will have a Tap Menu plaque preplaced on them. For QSR locations or food trucks, a Tap Menu poster or Tap Menu stand is prominently placed somewhere guests can access them. All options have three things on them: an NFC chip, QR code, and a web link. The customer can choose one of these three methods to open the menu on their phone. From there they can make orders, send requests, ask questions, and pay for their order. You can watch the video below for an overview of the experience.</div>
@@ -456,7 +458,8 @@
       </div>
       <div class="contact-us">
         <div class="contact-section">
-          <p>Tap Menu is just $49/month and it'll make you so much more.</p>
+          <p>Tap Menu is free until Oct 1st 2020!</p>
+          <small>Normally it's $9/month for takeout/delivery ordering and $49/month for tableside ordering.</small>
           <p>
             To request a demo or find out how you can get Tap Menu in your restaurant, reach us at
             <a
@@ -531,6 +534,7 @@ export default {
       cardTapping: false,
       cardTapFinished: false,
       turnOnPhone: false,
+      addedWidget: false,
       isSoldOut: true,
       notifyForSaleEmail: "",
       siema: {},
@@ -587,6 +591,16 @@ export default {
     openTapMenu() {
       window.open("https://tapmenu.app/?c=000", "_blank");
     },
+    loadWidget() {
+      if (this.$data.addedWidget) {
+        return;
+      }
+      this.$data.addedWidget = true;
+      const script = document.createElement("script");
+      script.setAttribute("code", "0ZT");
+      script.setAttribute("src", "https://api.nickfish.net/js/tm-embed.js");
+      document.head.appendChild(script);
+    },
     restart() {
       this.$data.siema.goTo(0);
       this.$data.cardTapping = false;
@@ -597,11 +611,11 @@ export default {
       this.$data.siema.goTo(index);
     },
     cardFlip() {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       this.$data.cardFlipped = !this.$data.cardFlipped;
     },
     cardTap() {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       this.$data.cardTapping = true;
       clearTimeout(this.$data.animationTimeout);
       this.$data.animationTimeout = setTimeout(() => {
@@ -620,7 +634,7 @@ export default {
     },
     screenTap() {
       if (!this.$data.cardTapping) {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         this.$data.cardTapping = true;
         this.$data.turnOnPhone = true;
         clearTimeout(this.$data.animationTimeout);
@@ -1303,11 +1317,11 @@ video {
   }
 }
 @media #{$mobile} {
-.device-text {
-  line-height: 35px;
-  max-width: 500px;
-  width: 95vw;
-}
+  .device-text {
+    line-height: 35px;
+    max-width: 500px;
+    width: 95vw;
+  }
   .large-text {
     font-size: 25px;
     padding: 10px 20px;
@@ -1377,6 +1391,14 @@ video {
   &:hover {
     opacity: 0.75;
   }
+}
+.widget-text {
+  font-size: 20px;
+  font-family: b;
+  max-width: 650px;
+  padding: 0 20px;
+  text-align: center;
+  line-height: 30px;
 }
 .wrap-container {
   display: flex;
