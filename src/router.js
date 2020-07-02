@@ -2,20 +2,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import PrivacyPolicy from '@/views/PrivacyPolicy.vue'
+import Nfc from '@/views/Nfc.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: Home
   },
   {
     path: '/privacy-policy',
-    name: 'privacy-policy',
+    name: 'Privacy Policy',
     component: PrivacyPolicy
-  }
+  },
+  {
+    path: '/nfc',
+    name: 'NFC',
+    component: Nfc
+  },
 ]
 
 const router = new VueRouter({

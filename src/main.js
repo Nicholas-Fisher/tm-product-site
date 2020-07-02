@@ -37,6 +37,8 @@ import {
   faBookOpen,
   faAngleRight,
   faTypewriter,
+  faChartNetwork,
+  faHeadSideCough,
 } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AOS from 'aos';
@@ -76,6 +78,8 @@ library.add(
   faBookOpen,
   faTypewriter,
   faAngleRight,
+  faChartNetwork,
+  faHeadSideCough,
 );
 
 AOS.init();
@@ -88,3 +92,4 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
+

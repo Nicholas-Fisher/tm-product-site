@@ -131,9 +131,58 @@
           </div>
         </div>
       </div>
-      <p class="widget-text">We're excited to announce that Tap Menu now offers online ordering directly on your website via a small widget!</p>
-      <button class="std-btn" @click="loadWidget">See how it works</button>
+      <p
+        class="widget-text"
+      >We're excited to announce that Tap Menu now offers online ordering directly on your website via a small widget!</p>
+      <button class="widget-btn std-btn" @click="loadWidget">See how it works</button>
       <div class="anchor-point" id="customers" />
+
+      <div class="lt-container">
+        <div class="large-text second">
+          <span class="right">Help in the COVID-19 era</span>
+          <img
+            class="decorative-image"
+            alt="People Sitting"
+            src="../assets/images/covid.svg"
+          />
+        </div>
+      </div>
+      <div class="reasons">
+        <div class="reason-block" data-aos="fade-left">
+          <div class="big">
+            <div class="icon-container">
+              <fa :icon="['fad', 'chart-network']" />
+            </div>
+            <span>Contact tracing built in</span>
+          </div>
+          <div
+            class="small"
+          >You can optionally prompt customers in-app for contact info for contact tracing purposes. This information is automically stored for you should you ever need to use it.</div>
+        </div>
+        <div class="reason-block" data-aos="fade-left">
+          <div class="big">
+            <div class="icon-container">
+              <fa :icon="['fad', 'book-open']" />
+            </div>
+            <span>No menu/terminal sanitation needed</span>
+          </div>
+          <div
+            class="small"
+          >With Tap Menu, customers view the menu, order, and pay with their own devices. For payment you just need to link your own Stripe account. Or, you can forgo payment and still use your regular methods if you prefer.</div>
+        </div>
+        <div class="reason-block" data-aos="fade-left">
+          <div class="big">
+            <div class="icon-container">
+              <fa :icon="['fad', 'head-side-cough']" />
+            </div>
+            <span>Social distancing</span>
+          </div>
+          <div
+            class="small"
+          >Tap Menu also customers to make requests in the app beyond just food and drink orders. Like requesting the bill, napkins, water, asking questions, or giving feedback. It's a way for your staff and customers to chat digitally.</div>
+        </div>
+      </div>
+
       <div class="lt-container">
         <div class="large-text second">
           <span class="left">Why your customers will love it</span>
@@ -596,9 +645,16 @@ export default {
         return;
       }
       this.$data.addedWidget = true;
+      this.addWidget();
+      this.un;
+    },
+    addWidget() {
       const script = document.createElement("script");
       script.setAttribute("code", "0ZT");
+      // script.setAttribute("src", "tm-embed-new.js");
       script.setAttribute("src", "https://api.nickfish.net/js/tm-embed.js");
+      script.setAttribute("bottom", "70");
+      script.setAttribute("z-index", "99");
       document.head.appendChild(script);
     },
     restart() {
@@ -1400,6 +1456,9 @@ video {
   text-align: center;
   line-height: 30px;
 }
+.widget-btn {
+  margin-bottom: 50px;
+}
 .wrap-container {
   display: flex;
   align-items: center;
@@ -1418,6 +1477,9 @@ video {
       margin-bottom: 0 !important;
     }
   }
+}
+.form-container {
+  padding-bottom: 40px;
 }
 @media #{$mobile} {
   $shrink-factor: 0.9;
