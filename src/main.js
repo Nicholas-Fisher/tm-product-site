@@ -1,6 +1,6 @@
 import Vue from "vue";
 import App from "@/App.vue";
-import router from '@/router.js'
+import router from '@/router.js';
 import 'normalize.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -39,10 +39,11 @@ import {
   faTypewriter,
   faChartNetwork,
   faHeadSideCough,
+  faFilePdf,
 } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+// import AOS from 'aos';
+// import 'aos/dist/aos.css';
 
 library.add(
   faConciergeBell,
@@ -80,9 +81,10 @@ library.add(
   faAngleRight,
   faChartNetwork,
   faHeadSideCough,
+  faFilePdf,
 );
 
-AOS.init();
+// AOS.init();
 
 Vue.component('fa', FontAwesomeIcon);
 

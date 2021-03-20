@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import PrivacyPolicy from '@/views/PrivacyPolicy.vue'
 import Nfc from '@/views/Nfc.vue'
+import School from '@/views/School.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/nfc',
     name: 'NFC',
     component: Nfc
+  },
+  {
+    path: '/school',
+    name: 'SCHOOL',
+    component: School
   },
 ]
 
