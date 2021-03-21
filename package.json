@@ -8,12 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "latest",
-    "@fortawesome/free-brands-svg-icons": "latest",
-    "@fortawesome/pro-duotone-svg-icons": "latest",
-    "@fortawesome/pro-regular-svg-icons": "latest",
-    "@fortawesome/pro-solid-svg-icons": "latest",
-    "@fortawesome/vue-fontawesome": "latest",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/pro-duotone-svg-icons": "C:\\Users\\avidn\\Dev\\general-assets\\fa\\faProDuo.tgz",
+    "@fortawesome/pro-regular-svg-icons": "C:\\Users\\avidn\\Dev\\general-assets\\fa\\faProReg.tgz",
+    "@fortawesome/pro-solid-svg-icons": "C:\\Users\\avidn\\Dev\\general-assets\\fa\\faProSolid.tgz",
+    "@fortawesome/vue-fontawesome": "^2.0.2",
     "aos": "^2.3.4",
     "core-js": "^3.6.4",
     "normalize.css": "^8.0.1",
