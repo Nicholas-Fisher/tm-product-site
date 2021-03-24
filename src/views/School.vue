@@ -1,7 +1,7 @@
 <template>
   <div class="button-list">
     <img class="logo-row" alt="logo" src="../assets/images/school-min.png" />
-      <a class="std-btn" href="https://firebasestorage.googleapis.com/v0/b/table-tap.appspot.com/o/manualUploads%2Fpdfs%2FWeekdayTakeout_SCHOOLJan102021.pdf?alt=media&token=df47c2f3-4827-4543-ae3b-36b47828c942" download>
+      <a class="std-btn" href="https://firebasestorage.googleapis.com/v0/b/table-tap.appspot.com/o/manualUploads%2Fpdfs%2FWeekdayAllDayBrunch_SCHOOLMar202021.pdf?alt=media&token=7a8a3809-fce4-4373-9519-298bc614f388" download>
         <div class="big-text">Food PDF</div>
         <fa :icon="['fad', 'file-pdf']" />
       </a>
